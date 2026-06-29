@@ -1036,10 +1036,9 @@
       }
       .nav-links a { font-size: 9.5px; letter-spacing: .08em; }
 
-      /* Push hero-middle up so roles clear the 2-line name */
-      .hero-middle {
-        inset: var(--nav-h) 0 50vh 0;
-      }
+      /* Shorter hero on phone, with extra bottom inset to clear 2-line name */
+      #hero { height: 80vh; }
+      .hero-middle { inset: var(--nav-h) 0 45vh 0; }
 
       /* Hero roles match nav font on phone */
       .hero-roles {
