@@ -145,7 +145,7 @@
 
     .hero-middle {
       position: absolute;
-      inset: var(--nav-h) 0 35vh 0;
+      inset: calc(var(--nav-h) + 120px) 0 35vh 0;
       z-index: 2;
       display: flex;
       align-items: center;
@@ -1038,7 +1038,7 @@
 
       /* Shorter hero on phone, with extra bottom inset to clear 2-line name */
       #hero { height: 80vh; }
-      .hero-middle { inset: var(--nav-h) 0 45vh 0; }
+      .hero-middle { inset: calc(var(--nav-h) + 60px) 0 45vh 0; }
 
       /* Hero roles match nav font on phone */
       .hero-roles {
