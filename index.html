@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karen Chen — Portfolio</title>
+  <style>
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('fonts/Aeonik-Light.woff2') format('woff2');
+      font-weight: 300; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('fonts/Aeonik-Regular.woff2') format('woff2');
+      font-weight: 400; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('fonts/Aeonik-Medium.woff2') format('woff2');
+      font-weight: 500; font-style: normal; font-display: swap;
+    }
+    @font-face {
+      font-family: 'Aeonik';
+      src: url('fonts/Aeonik-Bold.woff2') format('woff2');
+      font-weight: 700; font-style: normal; font-display: swap;
+    }
+  </style>
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #F8F8F8;
+      --bg-alt:      #FFFFFF;
+      --text:        #222222;
+      --text-muted:  #7B7B7B;
+      --accent:      #222222;
+      --accent-soft: #EFEFEF;
+      --border:      #E4E4E4;
+      --radius:      12px;
+      --nav-h:       72px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Aeonik', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ─── Typography ────────────────────────────────────────────────── */
+    .serif { font-family: 'Aeonik', sans-serif; }
+
+    h1, h2, h3 { line-height: 1.2; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    /* ─── Layout helpers ────────────────────────────────────────────── */
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    section { padding: 100px 0; }
+    section:nth-child(even) { background: var(--bg-alt); }
+
+    /* ─── Navigation ────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      z-index: 100;
+      transition: background .4s, box-shadow .4s;
+    }
+
+    nav.scrolled {
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 1px 0 var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover { color: var(--text-muted); }
+
+    /* ─── Hero ──────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: #FFFFFF;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-bg-img {
+      width: 100%;
+      height: 100%;
+      background: #FFFFFF;
+    }
+
+    .hero-middle {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: calc(var(--nav-h) + 180px);
+      padding-right: 30vw;
+    }
+
+    .hero-middle p {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: .06em;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    /* Memoji */
+    .hero-memoji {
+      position: absolute;
+      top: 50%;
+      right: 8%;
+      transform: translateY(-50%);
+      z-index: 1;
+      width: clamp(220px, 28vw, 380px);
+      aspect-ratio: 1 / 1;
+    }
+
+    .hero-memoji-blob {
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      top: 20%;
+      left: 20%;
+      background: radial-gradient(circle at center,
+        #FFF3B8 0%,
+        #FFE98A 30%,
+        rgba(255, 233, 138, 0.5) 60%,
+        rgba(255, 233, 138, 0) 80%);
+      filter: blur(28px);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .hero-memoji-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .hero-name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      overflow: hidden;
+      line-height: 1;
+    }
+
+    .hero-name span {
+      display: block;
+      font-family: 'Aeonik', sans-serif;
+      font-size: 100px;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -0.025em;
+      line-height: 0.88;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* ─── About ─────────────────────────────────────────────────────── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .about-left h2 {
+      font-family: 'Aeonik', sans-serif;
+      font-size: clamp(32px, 3.5vw, 48px);
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .about-left p {
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-size: 16px;
+    }
+
+    .about-right { padding-top: 44px; }
+
+    .about-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .about-card h4 {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .about-card p {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    .lang-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 5px 13px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text);
+    }
+
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+
+    /* ─── Work / Portfolio ──────────────────────────────────────────── */
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 56px;
+    }
+
+    .section-header h2 {
+      font-family: 'Aeonik', sans-serif;
+      font-size: clamp(28px, 3vw, 42px);
+      font-weight: 500;
+    }
+
+    .view-all {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-muted);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding-bottom: 4px;
+      border-bottom: 1px solid var(--border);
+      transition: color .2s, border-color .2s;
+    }
+
+    .view-all:hover { color: var(--accent); border-color: var(--accent); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: transform .3s, box-shadow .3s;
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 60px rgba(0,0,0,.09);
+    }
+
+    .project-thumb {
+      aspect-ratio: 16/10;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-thumb::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(184,115,51,.08));
+    }
+
+    .thumb-icon {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: .18;
+    }
+
+    .project-body { padding: 24px; }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .tag {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 50px;
+    }
+
+    .project-title {
+      font-family: 'Aeonik', sans-serif;
+      font-size: 19px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .project-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    .project-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tool-tag {
+      font-size: 11px;
+      padding: 3px 10px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      color: var(--text-muted);
+    }
+
+    .project-link {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      text-decoration: none;
+      letter-spacing: .04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid var(--text);
+      padding-bottom: 2px;
+      transition: color .2s, border-color .2s;
+    }
+
+    .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+    /* ─── Skills ────────────────────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .skill-group {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+
+    .skill-group h4 {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 18px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .skill-item:last-child { border-bottom: none; }
+
+    .skill-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .cert-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-top: 8px;
+      font-size: 12px;
+      width: 100%;
+    }
+
+    .cert-badge .badge-icon {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, var(--accent-soft), var(--accent));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .cert-badge--link {
+      text-decoration: none;
+      color: inherit;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .cert-badge--link:hover {
+      border-color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .cert-info { flex: 1; }
+    .cert-info .cert-name { font-weight: 600; font-size: 12px; }
+    .cert-info .cert-score { font-size: 11px; color: var(--text-muted); }
+
+    /* ─── Experience ────────────────────────────────────────────────── */
+    .exp-header {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      margin-bottom: 64px;
+    }
+
+    .exp-header-left h2 {
+      font-family: 'Aeonik', sans-serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-top: 14px;
+    }
+
+    .exp-header-right { padding-top: 6px; }
+
+    .exp-header-right p {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .exp-cta {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+      text-decoration-color: var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: text-decoration-color .2s;
+    }
+
+    .exp-cta:hover { text-decoration-color: var(--text); }
+
+    .exp-list { border-top: 1px solid var(--border); }
+
+    .exp-row {
+      display: grid;
+      grid-template-columns: 2.2fr 2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-company {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 7px;
+    }
+
+    .exp-date {
+      font-size: 13px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .exp-date::before { content: '•'; }
+
+    .exp-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    .exp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .exp-tag {
+      font-size: 12px;
+      font-weight: 500;
+      padding: 6px 18px;
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .exp-tag--filled {
+      background: var(--text);
+      color: #fff;
+      border-color: var(--text);
+    }
+
+    /* Grouped row: one company, multiple roles */
+    .exp-group {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-group-company {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .exp-subrow {
+      display: grid;
+      grid-template-columns: 2.2fr 2fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 14px 0;
+    }
+
+    .exp-subrow + .exp-subrow {
+      border-top: 1px solid var(--border);
+    }
+
+    .exp-role-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    /* Expanded row */
+    .exp-row--expanded {
+      display: block;
+      padding: 28px 0 36px;
+    }
+
+    .exp-row-top {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+
+    .exp-row-bottom {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+      align-items: start;
+    }
+
+    .exp-row-bottom--text-only {
+      display: block;
+      max-width: 760px;
+    }
+
+    .exp-thumbs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .exp-thumb {
+      aspect-ratio: 4/3;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      overflow: hidden;
+    }
+
+    .exp-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .exp-expand-desc {
+      font-size: 15px;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .exp-arrow-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--text);
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+    }
+
+    .exp-arrow-btn:hover { background: var(--text-muted); transform: scale(1.05); }
+
+    /* ─── Services ──────────────────────────────────────────────────── */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      max-width: 720px;
+    }
+
+    .service-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      background: var(--bg);
+      transition: border-color .3s, transform .3s;
+    }
+
+    .service-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+
+    .service-num {
+      font-family: 'Aeonik', sans-serif;
+      font-size: 48px;
+      font-weight: 400;
+      color: var(--accent-soft);
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .service-card p {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+
+    .service-type {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      padding: 5px 12px;
+      border: 1px solid var(--accent);
+      border-radius: 50px;
+      display: inline-block;
+    }
+
+    /* ─── Testimonials ──────────────────────────────────────────────── */
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .testimonial-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+    }
+
+    .quote-mark {
+      font-family: 'Aeonik', sans-serif;
+      font-size: 64px;
+      line-height: .6;
+      color: var(--accent);
+      margin-bottom: 16px;
+      opacity: .4;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      font-style: italic;
+      color: var(--text-muted);
+      line-height: 1.75;
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .author-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      border: 1px solid var(--border);
+    }
+
+    .author-info .name { font-size: 14px; font-weight: 600; }
+    .author-info .role { font-size: 12px; color: var(--text-muted); }
+
+    /* ─── Contact ───────────────────────────────────────────────────── */
+    #contact { background: var(--bg-alt); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+      align-items: start;
+      max-width: 640px;
+    }
+
+    .contact-left h2 {
+      font-family: 'Aeonik', sans-serif;
+      font-size: clamp(28px, 3vw, 40px);
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    .contact-left p {
+      font-size: 15px;
+      color: var(--text-muted);
+      margin-bottom: 40px;
+      line-height: 1.75;
+    }
+
+    .contact-info-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .contact-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 10px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-info-item span { font-size: 14px; color: var(--text-muted); }
+    .contact-info-item a { font-size: 14px; font-weight: 500; color: var(--text); text-decoration: none; }
+    .contact-info-item a:hover { color: var(--accent); }
+
+    .social-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 36px;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 15px;
+      transition: border-color .2s, color .2s, background .2s;
+    }
+
+    .social-link:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    /* Form */
+    .contact-form { display: flex; flex-direction: column; gap: 16px; }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      background: var(--bg);
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      transition: border-color .2s;
+      resize: none;
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus { border-color: var(--accent); }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: var(--text-muted); opacity: .6; }
+
+    .btn-submit {
+      padding: 15px 32px;
+      background: var(--text);
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background .2s, transform .2s;
+      align-self: flex-start;
+    }
+
+    .btn-submit:hover { background: var(--accent); transform: translateY(-2px); }
+
+    /* ─── Footer ────────────────────────────────────────────────────── */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border);
+      background: var(--bg);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer-copy { font-size: 13px; color: var(--text-muted); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 13px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color .2s;
+    }
+
+    .footer-links a:hover { color: var(--text); }
+
+    /* ─── Fade-in animation ─────────────────────────────────────────── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    .fade-up:nth-child(2) { transition-delay: .1s; }
+    .fade-up:nth-child(3) { transition-delay: .2s; }
+    .fade-up:nth-child(4) { transition-delay: .3s; }
+    .fade-up:nth-child(5) { transition-delay: .4s; }
+    .fade-up:nth-child(6) { transition-delay: .5s; }
+
+    /* ─── Mobile ────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid, .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .projects-grid, .services-grid, .testimonials-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+
+      .section-header { flex-direction: column; gap: 16px; align-items: flex-start; }
+
+      nav { padding: 0 24px; }
+      .nav-links { gap: 0; }
+      .nav-links li:nth-child(3),
+      .nav-links li:nth-child(4) { display: none; }
+
+      .hero-middle p { font-size: 13px; }
+      .hero-name { padding: 0 24px 0; }
+
+      .form-row { grid-template-columns: 1fr; }
+
+      .footer-inner { flex-direction: column; gap: 16px; text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0 20px; }
+      section { padding: 72px 0; }
+      .skills-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── Navigation ──────────────────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <ul class="nav-links">
+      <li><a href="#experience">Work Experience</a></li>
+      <li><a href="#about">About Me</a></li>
+      <li><a href="#skills">Core Competencies</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── Hero ────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-img"></div>
+  </div>
+  <div class="hero-middle">
+    <p>Account Management · Supply Chain Operations</p>
+  </div>
+  <div class="hero-memoji">
+    <div class="hero-memoji-blob"></div>
+    <img src="memoji.png" alt="Karen Chen avatar" class="hero-memoji-img" />
+  </div>
+  <div class="hero-name">
+    <span>KAREN CHEN</span>
+  </div>
+</section>
+
+<!-- ─── Experience ───────────────────────────────────────────────────── -->
+<section id="experience">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="exp-header fade-up">
+      <div class="exp-header-left">
+        <span class="section-label">● Experience</span>
+        <h2>Explore My<br>Career Journey</h2>
+      </div>
+      <div class="exp-header-right">
+        <p>Over the past several years, I've helped enterprise customers adopt and utilize Order Management and Booking Management Systems at Flexport — providing troubleshooting, operational guidance, and cross-functional coordination across a fast-paced global logistics environment.</p>
+        <a href="#contact" class="exp-cta">Get In Touch ↗</a>
+      </div>
+    </div>
+
+    <!-- Experience list -->
+    <div class="exp-list">
+
+      <div class="exp-group fade-up">
+        <div class="exp-group-company">Flexport, Hong Kong</div>
+
+        <div class="exp-subrow">
+          <div class="exp-left">
+            <div class="exp-role-title">Program Manager, Control Tower &amp; Service Delivery</div>
+            <div class="exp-date">Jan 2026 – Present</div>
+          </div>
+          <div class="exp-mid">
+            <p class="exp-desc">Managing a portfolio of enterprise accounts across OMS and Booking Management Systems. Built AI-powered reporting solutions supporting ~145% achievement of revenue and volume targets.</p>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Program Mgmt</span>
+            <span class="exp-tag">Operations</span>
+          </div>
+        </div>
+
+        <div class="exp-subrow">
+          <div class="exp-left">
+            <div class="exp-role-title">Account Manager</div>
+            <div class="exp-date">Sep 2024 – Dec 2025</div>
+          </div>
+          <div class="exp-mid">
+            <p class="exp-desc">Owned onboarding, service delivery, and QBRs for enterprise customers. Improved client satisfaction by 30% through proactive issue identification and cross-functional resolution.</p>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag">Account Mgmt</span>
+            <span class="exp-tag">QBR</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Expanded row -->
+      <div class="exp-row exp-row--expanded fade-up">
+        <div class="exp-row-top">
+          <div class="exp-left">
+            <div class="exp-company">Highlight — AI-Powered Reporting at Flexport</div>
+            <div class="exp-date">2026 Initiative</div>
+          </div>
+          <div class="exp-tags">
+            <span class="exp-tag exp-tag--filled">AI Automation</span>
+            <span class="exp-tag exp-tag--filled">Reporting</span>
+          </div>
+        </div>
+        <div class="exp-row-bottom exp-row-bottom--text-only">
+          <p class="exp-expand-desc">Built AI-powered reporting solutions that improved operational efficiency, follow-up accuracy, and decision-making — supporting ~145% achievement of revenue and volume targets across two consecutive quarters.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── About ───────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-left fade-up">
+        <span class="section-label">About me</span>
+        <h2 class="serif">Bridging languages,<br>cultures &amp; teams</h2>
+        <p>
+          I'm an operations and customer support professional with experience helping enterprise
+          customers adopt and utilize Order Management and Booking Management Systems — providing
+          platform troubleshooting, operational guidance, and cross-functional coordination.
+        </p>
+        <p>
+          Skilled in root-cause analysis, stakeholder management, process documentation, and service
+          delivery within a fast-paced global logistics environment. I'm naturally curious, deeply
+          empathetic, and energized by the puzzle of making complex systems work smoothly across
+          cultures and time zones.
+        </p>
+        <p style="margin-bottom:0; font-size:14px; color:var(--text-muted);">
+          🎵 Music &nbsp;·&nbsp; 🎮 Gaming &nbsp;·&nbsp; 🎨 Drawing &nbsp;·&nbsp; 🎹 Piano &nbsp;·&nbsp; 🎸 Ukulele
+        </p>
+      </div>
+      <div class="about-right fade-up">
+        <div class="about-card">
+          <h4>Education</h4>
+          <p>
+            <strong>MA in Translation</strong> · Sep 2023 – Jun 2024<br>
+            The Chinese University of Hong Kong
+          </p>
+          <br>
+          <p>
+            <strong>BA in Spanish Language &amp; Literature</strong> · Sep 2019 – Jun 2023<br>
+            Fudan University, Shanghai
+          </p>
+          <br>
+          <p>
+            <strong>Exchange Semester</strong> · Jan 2022 – Jun 2022<br>
+            Universidad Autónoma de Madrid
+          </p>
+        </div>
+        <div class="about-card">
+          <h4>Languages</h4>
+          <div class="lang-chips">
+            <span class="chip"><span class="dot"></span>Mandarin</span>
+            <span class="chip"><span class="dot"></span>Shanghainese</span>
+            <span class="chip"><span class="dot"></span>Cantonese</span>
+            <span class="chip"><span class="dot"></span>English</span>
+            <span class="chip"><span class="dot"></span>Spanish</span>
+            <span class="chip"><span class="dot"></span>Japanese</span>
+          </div>
+        </div>
+        <div class="about-card">
+          <h4>What makes me unique</h4>
+          <p>
+            A true polyglot operating across 6 languages — bridging East and West in
+            high-stakes business settings with precision, warmth, and cultural fluency.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Work / Portfolio (temporarily hidden) ──────────────────────── -->
+<!--
+<section id="work">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div>
+        <span class="section-label">Portfolio</span>
+        <h2 class="serif">Selected work</h2>
+      </div>
+      <a href="#" class="view-all">All projects →</a>
+    </div>
+    <div class="projects-grid">
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #EFEFEF;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><path d="M3 3h18v18H3z"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Account Management</span>
+          </div>
+          <h3 class="project-title">Client Onboarding Revamp</h3>
+          <p class="project-desc">Redesigned the end-to-end client onboarding workflow, reducing time-to-first-shipment by 30% through cross-functional coordination.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Asana</span>
+            <span class="tool-tag">Slack</span>
+            <span class="tool-tag">Notion</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #EBEBEB;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><circle cx="12" cy="12" r="9"/><path d="M12 3v9l6 3"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Translation</span>
+          </div>
+          <h3 class="project-title">Legal Document Translation</h3>
+          <p class="project-desc">Provided certified translation of complex legal and commercial contracts between English, Spanish, and Mandarin for multinational clients.</p>
+          <div class="project-tools">
+            <span class="tool-tag">SDLX</span>
+            <span class="tool-tag">CAT Tools</span>
+            <span class="tool-tag">Adobe Acrobat</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #E8E8E8;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Project Management</span>
+          </div>
+          <h3 class="project-title">Cross-Border SOP Rollout</h3>
+          <p class="project-desc">Led the rollout of standardized origin SOPs across TW/US teams, improving handoff quality and reducing exception rates.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Asana</span>
+            <span class="tool-tag">Looker</span>
+            <span class="tool-tag">Jira</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #EAEAEA;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Data &amp; Reporting</span>
+          </div>
+          <h3 class="project-title">KPI Dashboard Design</h3>
+          <p class="project-desc">Collaborated with the data team to design a Looker dashboard consolidating KPIs for account managers, enabling self-serve weekly reporting.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Looker</span>
+            <span class="tool-tag">Snowflake</span>
+            <span class="tool-tag">Jira</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #E6E6E6;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Interpretation</span>
+          </div>
+          <h3 class="project-title">Executive Liaison &amp; Interpretation</h3>
+          <p class="project-desc">Provided simultaneous and consecutive interpretation for executive meetings between Chinese-speaking and English/Spanish-speaking stakeholders.</p>
+          <div class="project-tools">
+            <span class="tool-tag">Zoom</span>
+            <span class="tool-tag">Teams</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+      <div class="project-card fade-up">
+        <div class="project-thumb" style="background: #E3E3E3;">
+          <div class="thumb-icon">
+            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width=".8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          Project Thumbnail
+        </div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="tag">Operations</span>
+          </div>
+          <h3 class="project-title">Supply Chain Digitization</h3>
+          <p class="project-desc">Drove CI/PL digitization initiative with key accounts, streamlining document workflows and cutting manual processing time significantly.</p>
+          <div class="project-tools">
+            <span class="tool-tag">OMS</span>
+            <span class="tool-tag">FFA</span>
+            <span class="tool-tag">Asana</span>
+          </div>
+          <a href="#" class="project-link">Case study coming soon →</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+-->
+
+<!-- ─── Skills & Tools ───────────────────────────────────────────────── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div>
+        <span class="section-label">Skills &amp; Tools</span>
+        <h2 class="serif">Core competencies</h2>
+      </div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group fade-up">
+        <h4>Core Skills</h4>
+        <div class="skill-item"><span class="skill-icon">🤝</span>Account Management</div>
+        <div class="skill-item"><span class="skill-icon">👥</span>Stakeholder Management</div>
+        <div class="skill-item"><span class="skill-icon">🚢</span>Supply Chain Operations</div>
+        <div class="skill-item"><span class="skill-icon">📦</span>OMS &amp; Booking Systems</div>
+        <div class="skill-item"><span class="skill-icon">🔍</span>Root-Cause Analysis</div>
+        <div class="skill-item"><span class="skill-icon">⚠️</span>Exception Handling</div>
+        <div class="skill-item"><span class="skill-icon">📊</span>Performance Reporting</div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <h4>Tools</h4>
+        <div class="skill-item"><span class="skill-icon">📊</span>Excel (PivotTables, XLOOKUP)</div>
+        <div class="skill-item"><span class="skill-icon">📈</span>Looker Studio</div>
+        <div class="skill-item"><span class="skill-icon">☁️</span>Salesforce CRM</div>
+        <div class="skill-item"><span class="skill-icon">🗂️</span>Google Workplace</div>
+        <div class="skill-item"><span class="skill-icon">🤖</span>AI-powered Reporting</div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <h4>Languages</h4>
+        <div class="skill-item"><span class="skill-icon">🇨🇳</span>Mandarin · Native</div>
+        <div class="skill-item"><span class="skill-icon">🏮</span>Shanghainese · Native</div>
+        <div class="skill-item"><span class="skill-icon">🇭🇰</span>Cantonese · Fluent</div>
+        <div class="skill-item"><span class="skill-icon">🇺🇸</span>English · Fluent</div>
+        <div class="skill-item"><span class="skill-icon">🇪🇸</span>Spanish · C1</div>
+        <div class="skill-item"><span class="skill-icon">🇯🇵</span>Japanese · N1</div>
+      </div>
+
+      <div class="skill-group fade-up">
+        <h4>Certifications</h4>
+        <div class="cert-badge">
+          <div class="badge-icon">🏅</div>
+          <div class="cert-info">
+            <div class="cert-name">DELE C1</div>
+            <div class="cert-score">Spanish — Proficiency Level</div>
+          </div>
+        </div>
+        <div class="cert-badge">
+          <div class="badge-icon">🏅</div>
+          <div class="cert-info">
+            <div class="cert-name">JLPT N1</div>
+            <div class="cert-score">Japanese — 163 / 180</div>
+          </div>
+        </div>
+        <a href="https://www.coursera.org/account/accomplishments/specialization/W9V9ZA7IUP95"
+           target="_blank" rel="noopener" class="cert-badge cert-badge--link">
+          <div class="badge-icon">🤖</div>
+          <div class="cert-info">
+            <div class="cert-name">Google AI Professional</div>
+            <div class="cert-score">Google · Jun 2026</div>
+          </div>
+        </a>
+        <a href="https://www.coursera.org/account/accomplishments/verify/RXHKESSM82CG"
+           target="_blank" rel="noopener" class="cert-badge cert-badge--link">
+          <div class="badge-icon">🗂️</div>
+          <div class="cert-info">
+            <div class="cert-name">Agile Project Management</div>
+            <div class="cert-score">Google · Jun 2026</div>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Testimonials ──────────────────────────────────────────────────── -->
+<section id="testimonials">
+  <div class="container">
+    <div class="section-header fade-up">
+      <div>
+        <span class="section-label">Testimonials</span>
+        <h2 class="serif">What people say</h2>
+      </div>
+    </div>
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">
+          Wanted to share some overall feedback on how great Karen is — she provides great support
+          for some of our largest, most complex CT customers. Works hard, is very detailed and
+          thorough. We appreciate her so much!
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">★</div>
+          <div class="author-info">
+            <div class="name">— Senior Director, Control Tower</div>
+            <div class="role">Flexport</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">
+          Big shout out to Karen. We spoke with one of our enterprise customers to check in on
+          how they thought the trial was going; they said we are "in a good spot" because they
+          really like the communication from Karen and our operations team.
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">★</div>
+          <div class="author-info">
+            <div class="name">— Business Development Director, Control Tower</div>
+            <div class="role">Flexport</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card fade-up">
+        <div class="quote-mark">"</div>
+        <p class="testimonial-text">
+          Great OMS training Karen, thank you! One day in Mandarin and another in Cantonese.
+          Great job!
+        </p>
+        <div class="testimonial-author">
+          <div class="author-avatar">★</div>
+          <div class="author-info">
+            <div class="name">— Senior Implementation Manager</div>
+            <div class="role">Flexport</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Contact ───────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-left fade-up">
+        <span class="section-label">Contact</span>
+        <h2 class="serif">Let's connect</h2>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <div>
+            <span>Email</span><br>
+            <a href="mailto:momokarenc@gmail.com">momokarenc@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+            </svg>
+          </div>
+          <div>
+            <span>Location</span><br>
+            <a href="#">Hung Hom, Kowloon, Hong Kong</a>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://linkedin.com/in/karen-chen-xy" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" title="GitHub">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </a>
+          <a href="#" class="social-link" title="Portfolio / Other">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ───────────────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <p class="footer-copy">© 2025 Karen Chen. All rights reserved.</p>
+    <ul class="footer-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+  // ── Sticky nav ────────────────────────────────────────────────────────
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // ── Intersection Observer — fade-up elements ──────────────────────────
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ── Smooth scroll for nav anchors ─────────────────────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // ── Fit hero name to full container width ────────────────────────────
+  function fitHeroName() {
+    const container = document.querySelector('.hero-name');
+    const span = container?.querySelector('span');
+    if (!container || !span) return;
+
+    // Measure text freely outside any overflow constraint
+    const probe = span.cloneNode(true);
+    probe.style.cssText = 'position:fixed;top:-9999px;left:-9999px;font-size:200px;white-space:nowrap;display:inline-block;visibility:hidden;font-family:"Aeonik",sans-serif;font-weight:700;letter-spacing:-0.025em;text-transform:uppercase;';
+    document.body.appendChild(probe);
+    const textW = probe.offsetWidth;
+    document.body.removeChild(probe);
+
+    const containerW = container.offsetWidth;
+    if (!textW || !containerW) return;
+    span.style.fontSize = Math.floor(200 * containerW / textW) + 'px';
+  }
+
+  fitHeroName();
+  window.addEventListener('resize', fitHeroName);
+  document.fonts?.ready.then(fitHeroName);
+
+  // ── Contact form (mock submit) ─────────────────────────────────────────
+  function handleForm(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('.btn-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('form-success').style.display = 'block';
+      btn.textContent = 'Sent ✓';
+    }, 1000);
+  }
+</script>
+</body>
+</html>
